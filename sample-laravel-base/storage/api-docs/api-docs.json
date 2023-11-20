@@ -1,0 +1,123 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "DISDIK SSO Documentation",
+        "description": "DISDIK SSO API Documentation For Integration",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "email": "disdik@jabarprov.go.id"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/auth/login": {
+            "post": {
+                "tags": [
+                    "Authentikasi"
+                ],
+                "summary": "Mengembalikan Data User yang berhasil Login",
+                "description": "Mengembalikan Data User yang berhasil Login",
+                "operationId": "Login",
+                "requestBody": {
+                    "description": "Bulk products Body",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "username": {
+                                        "type": "string",
+                                        "example": "foo"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "bar"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "422": {
+                        "description": "Validation Error"
+                    }
+                }
+            }
+        },
+        "/api/auth/logout": {
+            "get": {
+                "tags": [
+                    "Authentikasi"
+                ],
+                "summary": "Mengeluarkan user dan menghapus data token",
+                "description": "Mengeluarkan user dan menghapus data token",
+                "operationId": "Logout",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "422": {
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/user": {
+            "get": {
+                "tags": [
+                    "Authentikasi"
+                ],
+                "summary": "Mengeluarkan data user yang sedang login",
+                "description": "Mengeluarkan data user yang sedang login",
+                "operationId": "User",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "422": {
+                        "description": "Validation Error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "bearerAuth",
+                "in": "header",
+                "scheme": "bearer"
+            }
+        }
+    }
+}
